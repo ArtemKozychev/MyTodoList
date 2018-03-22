@@ -53,6 +53,11 @@
                                             </form>
                                         </td>
                                         <td>
+                                            <form action="/show/{{ $task->id }}" method="GET">
+                                                <button>Редактировать</button>
+                                            </form>
+                                        </td>
+                                        <td>
                                             @if($task->flag != 1)
                                                 <form action="/task/check/{{ $task->id }}" method="GET">
                                                     <button>Отметить задачу</button>

@@ -25,4 +25,8 @@ Route::post('/task/store', 'TaskController@store')->name('store');
 
 Route::get('/task/{id}', 'TaskController@destroy')->where('name', '\d+');
 
-Route::get('/task/check/{id}', 'TaskController@checkTaskById')->where('name', '\d+');;
+Route::get('/task/check/{id}', 'TaskController@checkTaskById')->where('name', '\d+');
+
+Route::get('/show/{id}', 'TaskController@show')->where('name', '\d+');
+
+Route::post('/task/update', 'TaskController@update')->name('update');

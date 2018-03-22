@@ -20,6 +20,16 @@ class TaskController extends Controller
         return view('task', compact('tasks'));
     }
 
+    public function show(Task $TaskModel, $id){
+        $task = $TaskModel->getTaskById($id);
+        return view('update', compact('task'));
+    }
+
+    public function update(Task $TaskModel, Request $request){
+        $TaskModel->updateTask($request);
+        return redirect('/task');
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [
