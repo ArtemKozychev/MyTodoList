@@ -22,3 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/task', 'TaskController@index')->name('index');
 
 Route::post('/task/store', 'TaskController@store')->name('store');
+
+Route::get('/task/{id}', 'TaskController@destroy')->where('name', '\d+');
+
+Route::get('/task/check/{id}', 'TaskController@checkTaskById')->where('name', '\d+');;

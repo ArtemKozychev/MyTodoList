@@ -37,10 +37,27 @@
                                 @foreach ($tasks as $task)
                                     <tr>
                                         <td class="table-text">
+                                            @if($task->flag == 1)
+                                                &#10003
+                                            @endif
+                                        </td>
+                                        <td class="table-text">
                                             <div>{{ $task->name }}</div>
                                         </td>
                                         <td class="table-text">
                                             <div>{{ $task->description }}</div>
+                                        </td>
+                                        <td>
+                                            <form action="/task/{{ $task->id }}" method="GET">
+                                                <button>Удалить задачу</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            @if($task->flag != 1)
+                                                <form action="/task/check/{{ $task->id }}" method="GET">
+                                                    <button>Отметить задачу</button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

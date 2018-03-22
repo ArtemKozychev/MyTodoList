@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Task extends Model
 {
     protected $fillable = [
-        'user_id', 'name', 'description',
+        'user_id', 'name', 'description', 'flag'
     ];
 
     public function getTaskByUserId(){
@@ -17,5 +17,11 @@ class Task extends Model
             ->where('user_id',Auth::id())
             ->orderBy('id', 'ASC')
             ->get();
+    }
+
+    public function checkTaskById($id){
+        return DB::table('tasks')
+            ->where('id', $id)
+            ->update(['flag' => 1]);
     }
 }

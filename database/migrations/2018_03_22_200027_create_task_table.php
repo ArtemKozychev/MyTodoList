@@ -18,6 +18,7 @@ class CreateTaskTable extends Migration
             $table->integer('user_id');
             $table->string('name',255);
             $table->text('description');
+            $table->text('flag');
             $table->timestamps();
         });
     }

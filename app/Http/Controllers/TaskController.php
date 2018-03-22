@@ -30,9 +30,21 @@ class TaskController extends Controller
         Task::create([
             'user_id' => Auth::id(),
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'flag' => 0,
         ]);
 
+        return redirect('/task');
+    }
+
+    public function destroy($id)
+    {
+       Task::destroy($id);
+        return redirect('/task');
+    }
+    public function checkTaskById(Task $TaskModel, $id)
+    {
+        $TaskModel->checkTaskById($id);
         return redirect('/task');
     }
 }
