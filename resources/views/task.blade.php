@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <form action="/task/store" method="POST" class="form-horizontal">
-                {{ csrf_field() }}
+                    {{ csrf_field() }}
                     <div class="form-group">
                         <label for="task" class="col-sm-3 control-label">Название</label>
                         <div class="col-sm-6">
@@ -37,7 +37,7 @@
                                 @foreach ($tasks as $task)
                                     <tr>
                                         <td class="table-text">
-                                            @if($task->flag == 1)
+                                            @if($task->completed == 1)
                                                 &#10003
                                             @endif
                                         </td>
@@ -48,20 +48,20 @@
                                             <div>{{ $task->description }}</div>
                                         </td>
                                         <td>
-                                            <form action="/task/{{ $task->id }}" method="GET">
-                                                <button>Удалить задачу</button>
-                                            </form>
+                                            <a class="btn-sm btn-danger" href="/task/delete/{{ $task->id }}">
+                                                <span class="oi oi-minus">Удалить</span>
+                                            </a>
                                         </td>
                                         <td>
-                                            <form action="/show/{{ $task->id }}" method="GET">
-                                                <button>Редактировать</button>
-                                            </form>
+                                            <a class="btn-sm btn-primary" href="/show/{{ $task->id }}">
+                                                <span class="oi oi-magnifying-glass">Редактировать</span>
+                                            </a>
                                         </td>
                                         <td>
-                                            @if($task->flag != 1)
-                                                <form action="/task/check/{{ $task->id }}" method="GET">
-                                                    <button>Отметить задачу</button>
-                                                </form>
+                                            @if($task->completed != 1)
+                                                <a class="btn-sm btn-success" href="/task/check/{{ $task->id }}">
+                                                    <span class="oi oi-task">Отметить</span>
+                                                </a>
                                             @endif
                                         </td>
                                     </tr>

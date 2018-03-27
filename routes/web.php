@@ -17,16 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index');
 
-Route::get('/task', 'TaskController@index')->name('index');
+Route::get('/task', 'TasksController@index');
 
-Route::post('/task/store', 'TaskController@store')->name('store');
+Route::post('/task/store', 'TasksController@store');
 
-Route::get('/task/{id}', 'TaskController@destroy')->where('name', '\d+');
+Route::get('/task/delete/{id}', 'TasksController@delete');
 
-Route::get('/task/check/{id}', 'TaskController@checkTaskById')->where('name', '\d+');
+Route::get('/task/check/{id}', 'TasksController@checkTaskById');
 
-Route::get('/show/{id}', 'TaskController@show')->where('name', '\d+');
+Route::get('/show/{id}', 'TasksController@show');
 
-Route::post('/task/update', 'TaskController@update')->name('update');
+Route::post('/task/update', 'TasksController@update');

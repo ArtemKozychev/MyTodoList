@@ -6,20 +6,18 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTaskTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+
+    public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('name',255);
+            $table->string('name');
             $table->text('description');
-            $table->text('flag');
+            $table->boolean('completed')->default(false);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
