@@ -6,12 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersGeostationTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
         Schema::create('users_geostations', function (Blueprint $table) {
             $table->increments('id');
@@ -34,7 +29,7 @@ class CreateUsersGeostationTable extends Migration
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('users_geostations');
     }

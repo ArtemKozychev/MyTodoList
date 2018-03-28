@@ -30,3 +30,5 @@ Route::get('/task/check/{id}', 'TasksController@checkTaskById');
 Route::get('/show/{id}', 'TasksController@show');
 
 Route::post('/task/update', 'TasksController@update');
+
+Route::get('/register/confirm/{token}', 'Auth\RegisterController@confirmEmail');
