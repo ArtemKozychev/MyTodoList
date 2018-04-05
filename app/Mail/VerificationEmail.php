@@ -23,7 +23,7 @@ class VerificationEmail extends Mailable
 
     public function getTemporarySignedRoute(): string
     {
-        $expiration = now()->addSeconds(60);
+        $expiration = now()->addSeconds(60*60*24);
         $parameters = ['user' => $this->user->id];
 
         return URL::temporarySignedRoute('confirm-email', $expiration, $parameters);

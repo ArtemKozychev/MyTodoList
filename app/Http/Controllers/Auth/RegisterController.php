@@ -43,8 +43,8 @@ class RegisterController extends Controller
     {
         if (! $request->hasValidSignature()) {
             User::where('verified', 0)->findOrFail($request->user)->delete();
-            $request->session()->flash('message', 'Срок жизни ссылки истек, пожалуйста повторите регистрацию');
-//            abort(401);
+//            $request->session()->flash('message', 'Срок жизни ссылки истек, пожалуйста повторите регистрацию');
+            abort(401);
         }
         User::where('verified', 0)->findOrFail($request->user)->confirm();
         $request->session()->flash('message', 'Ваща учетная запись подтверждена. Войдите под своим именем.');
