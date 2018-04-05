@@ -2,24 +2,30 @@
 
 namespace App\Mail;
 
-use Illuminate\Bus\Queueable;
+use App\User;
 use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\URL;
 
 class VerificationEmail extends Mailable
 {
-    use Queueable, SerializesModels;
-
     public $user;
 
-    public function __construct($user)
+    public function __construct(User $user)
     {
         $this->user = $user;
     }
 
     public function build()
     {
-        return $this->view('mail.verification');
+        $confirm_url = $this->getTemporarySignedRoute();
+        return $this->view('mail.verification', compact('confirm_url'));
+    }
+
+    public function getTemporarySignedRoute(): string
+    {
+        $expiration = now()->addSeconds(60);
+        $parameters = ['user' => $this->user->id];
+
+        return URL::temporarySignedRoute('confirm-email', $expiration, $parameters);
     }
 }

@@ -35,14 +35,18 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'token' => $data['token'],
             'password' => Hash::make($data['password']),
         ]);
     }
 
-    public function confirmEmail(Request $request, $token)
+    public function confirmEmail(Request $request)
     {
-        User::whereToken($token)->firstOrFail()->update(['verified' => 1, 'token' => null]);
+        if (! $request->hasValidSignature()) {
+            User::where('verified', 0)->findOrFail($request->user)->delete();
+            $request->session()->flash('message', 'Срок жизни ссылки истек, пожалуйста повторите регистрацию');
+//            abort(401);
+        }
+        User::where('verified', 0)->findOrFail($request->user)->confirm();
         $request->session()->flash('message', 'Ваща учетная запись подтверждена. Войдите под своим именем.');
         return redirect('login');
     }

@@ -9,11 +9,18 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    protected $fillable = [
-        'name', 'email', 'password', 'verified', 'token'
+    protected $guarded = [
+        'id','verified',
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function confirm(): bool
+    {
+        $this->verified = 1;
+
+        return $this->save();
+    }
 }

@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -31,4 +31,4 @@ Route::get('/show/{id}', 'TasksController@show');
 
 Route::post('/task/update', 'TasksController@update');
 
-Route::get('/register/confirm/{token}', 'Auth\RegisterController@confirmEmail');
+Route::get('/register/confirm', 'Auth\RegisterController@confirmEmail')->name('confirm-email');
